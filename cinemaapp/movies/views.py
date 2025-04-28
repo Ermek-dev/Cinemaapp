@@ -15,8 +15,14 @@ class MovieListView(APIView):
         return Response(serializer.data)
 
 
-
-
+class MovieDetailView(APIView):
+    def get(self, request, pk, *args, **kwargs):
+        try:
+            movie = Movie.objects.get(pk=pk)
+            serializer = MovieSerializer(movie)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Movie.DoesNotExist:
+            return Response({'error': 'Фильм не найден'}, status=status.HTTP_404_NOT_FOUND)
 
 
 
