@@ -48,3 +48,16 @@ class MovieUpdateView(APIView):
             serializer.save()
             return Response({'message': 'Фильм успешно обновлен',})
         return Response({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class MovieDeleteView(APIView):
+    permission_classes = [IsAdminUser]
+
+    def delete(self, request,pk,*args, **kwargs):
+        try:
+            movie = Movie.objects.get(pk=pk)
+        except Movie.DoesNotExist:
+            return Response({'error': 'Фильм не найден'}, status=status.HTTP_404_NOT_FOUND)
+
+        movie.delete()
+        return Response({'message': 'Фильм успешно удален',})
