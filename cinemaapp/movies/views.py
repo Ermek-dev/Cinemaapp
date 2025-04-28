@@ -32,3 +32,19 @@ class MovieCreateView(APIView):
             movie = serializer.save()
             return Response({'message': 'Фильм успешно создан','id': movie.id}, status=status.HTTP_201_CREATED)
         return Response({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class MovieUpdateView(APIView):
+    permission_classes = [IsAdminUser]
+
+    def put(self, request,pk,*args, **kwargs):
+        try:
+            movie = Movie.objects.get(pk=pk)
+        except Movie.DoesNotExist:
+            return Response({'error': 'Фильм не найден'}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = MovieSerializer(movie, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Фильм успешно обновлен',})
+        return Response({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
