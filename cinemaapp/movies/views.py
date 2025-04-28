@@ -25,4 +25,10 @@ class MovieDetailView(APIView):
             return Response({'error': 'Фильм не найден'}, status=status.HTTP_404_NOT_FOUND)
 
 
-
+class MovieCreateView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = MovieSerializer(data=request.data)
+        if serializer.is_valid():
+            movie = serializer.save()
+            return Response({'message': 'Фильм успешно создан','id': movie.id}, status=status.HTTP_201_CREATED)
+        return Response({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
