@@ -1,0 +1,24 @@
+[
+{
+  "model": "movies.movie",
+  "pk": 1,
+  "fields": {
+    "title": "Inception Updated",
+    "description": "Updated description",
+    "duration": 150,
+    "posterUrl": "http://example.com/inception-updated.jpg",
+    "createdAt": "2025-04-28T13:23:43.976Z"
+  }
+},
+{
+  "model": "movies.movie",
+  "pk": 3,
+  "fields": {
+    "title": "Inception",
+    "description": "A mind-bending thriller",
+    "duration": 148,
+    "posterUrl": "http://example.com/inception.jpg",
+    "createdAt": "2025-04-30T09:55:26.153Z"
+  }
+}
+]
