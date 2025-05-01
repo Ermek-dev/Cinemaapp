@@ -8,6 +8,7 @@ virtualenv/
 env/
 ENV/
 .ENV/
+.env
 *.sqlite3
 db.sqlite3
 media/
