@@ -16,7 +16,8 @@ class User(AbstractUser):
         max_length=10,
         choices=RoleChoices.choices,
         blank=True,
-        null=True
+        null=True,
+        default='Пользователь'
     )
 
 
