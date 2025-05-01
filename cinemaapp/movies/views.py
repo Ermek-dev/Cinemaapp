@@ -1,5 +1,3 @@
-from django.http import JsonResponse
-from django.views.generic.base import View
 from rest_framework import status
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
@@ -60,4 +58,4 @@ class MovieDeleteView(APIView):
             return Response({'error': 'Фильм не найден'}, status=status.HTTP_404_NOT_FOUND)
 
         movie.delete()
-        return Response({'message': 'Фильм успешно удален',})
+        return Response({'message': 'Фильм успешно удален',}, status=status.HTTP_204_NO_CONTENT)
