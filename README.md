@@ -1,5 +1,3 @@
-# Cinemaapp_firstweek
-Cinema API for movie management with authentication"
 # 🎬 CinemaApp
 
 REST API для управления фильмами, с авторизацией, CRUD-операциями и проверкой прав доступа.
