@@ -10,7 +10,6 @@ from .serializers import RegisterSerializer
 
 class ProtectedView(APIView):
     permission_classes = [IsAdmin]
-
     def get(self, request):
         return Response({'message': 'Привет,Админ.Доступ разрешен!'}, status=status.HTTP_200_OK)
 
