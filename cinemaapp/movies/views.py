@@ -1,9 +1,11 @@
 from rest_framework import status
-from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Movie
 from .serializers import MovieSerializer
+from accounts.permissions import IsAdmin
+
+
 
 
 class MovieListView(APIView):
@@ -33,7 +35,7 @@ class MovieCreateView(APIView):
 
 
 class MovieUpdateView(APIView):
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdmin]
 
     def put(self, request,pk,*args, **kwargs):
         try:
@@ -49,7 +51,7 @@ class MovieUpdateView(APIView):
 
 
 class MovieDeleteView(APIView):
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdmin]
 
     def delete(self, request,pk,*args, **kwargs):
         try:
