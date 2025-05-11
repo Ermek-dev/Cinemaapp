@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Hall(models.Model):
-    name = models.CharField(
+    title = models.CharField(
         max_length=100,
         verbose_name='Название зала'
     )
@@ -15,4 +15,4 @@ class Hall(models.Model):
 
 
     def __str__(self):
-        return self.name
+        return self.title
