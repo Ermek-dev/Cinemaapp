@@ -1,6 +1,6 @@
 from django.db import models
 from halls.models import Hall
-from .movies.models.movies import Movie
+from movies.models import Movie
 
 
 class Session(models.Model):
