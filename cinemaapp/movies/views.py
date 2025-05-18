@@ -1,6 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from .models import Movie
 from .serializers import MovieSerializer
 from accounts.permissions import IsAdmin
@@ -36,6 +37,7 @@ class MovieCreateView(APIView):
 
 class MovieUpdateView(APIView):
     permission_classes = [IsAdmin]
+    authentication_classes = [JWTAuthentication]
 
     def put(self, request,pk,*args, **kwargs):
         try:
@@ -52,6 +54,7 @@ class MovieUpdateView(APIView):
 
 class MovieDeleteView(APIView):
     permission_classes = [IsAdmin]
+    authentication_classes = [JWTAuthentication]
 
     def delete(self, request,pk,*args, **kwargs):
         try:

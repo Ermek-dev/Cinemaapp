@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from .models import Hall
 from .serializers import HallSerializer
 from accounts.permissions import IsAdmin
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 # Create your views here.
@@ -38,6 +39,7 @@ class HallCreateView(APIView):
 
 class HallUpdateView(APIView):
     permission_classes =  [IsAdmin]
+    authentication_classes = [JWTAuthentication]
 
     def put(self, request,pk,*args,**kwargs):
         try:
@@ -55,7 +57,7 @@ class HallUpdateView(APIView):
 
 class HallDeleteView(APIView):
     permission_classes = [IsAdmin]
-
+    authentication_classes = [JWTAuthentication]
 
     def delete(self, request,pk,*args,**kwargs):
         try:

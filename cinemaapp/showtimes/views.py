@@ -1,6 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from .models import Session
 from .serializers import SessionSerializer
 from accounts.permissions import IsAdmin
@@ -26,6 +27,7 @@ class SessionDetailView(APIView):
 
 class SessionCreateView(APIView):
     permission_classes = [IsAdmin]
+    authentication_classes = [JWTAuthentication]
 
 
     def post(self, request, *args, **kwargs):
@@ -38,6 +40,7 @@ class SessionCreateView(APIView):
 
 class SessionUpdateView(APIView):
     permission_classes =  [IsAdmin]
+    authentication_classes = [JWTAuthentication]
 
     def put(self, request,pk,*args,**kwargs):
         try:
@@ -46,7 +49,7 @@ class SessionUpdateView(APIView):
             return Response({'error': 'Сессия не найдена'}, status=status.HTTP_404_NOT_FOUND)
 
 
-        serializer = SessionSerializer(session, data=request.data)
+        serializer = SessionSerializer(session, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response({'message': 'Информация о сессии обновлена'})
@@ -55,6 +58,7 @@ class SessionUpdateView(APIView):
 
 class SessionDeleteView(APIView):
     permission_classes = [IsAdmin]
+    authentication_classes = [JWTAuthentication]
 
 
     def delete(self, request,pk,*args,**kwargs):
