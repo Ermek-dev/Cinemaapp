@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Get all movies",
+			"name": "GET all movies",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -30,12 +30,12 @@
 			"response": []
 		},
 		{
-			"name": "Get movie by Id",
+			"name": "GET movie by Id",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/movies/1",
+					"raw": "http://127.0.0.1:8006/movies/1",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -43,7 +43,7 @@
 						"0",
 						"1"
 					],
-					"port": "8000",
+					"port": "8006",
 					"path": [
 						"movies",
 						"1"
@@ -53,7 +53,7 @@
 			"response": []
 		},
 		{
-			"name": "Post create movie",
+			"name": "POST create movie",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -67,7 +67,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/movies/create/",
+					"raw": "http://127.0.0.1:8006/movies/create/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -75,7 +75,7 @@
 						"0",
 						"1"
 					],
-					"port": "8000",
+					"port": "8006",
 					"path": [
 						"movies",
 						"create",
@@ -86,7 +86,7 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "PUT update movie",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -107,7 +107,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"Inception Updated\",\n    \"description\": \"Updated description\",\n    \"duration\": 150,\n    \"posterUrl\": \"http://example.com/inception-updated.jpg\"\n}",
+					"raw": "{\n    \"title\": \"Inception Updated\",\n    \"description\": \"Updated description refre\",\n    \"duration\": 150,\n    \"posterUrl\": \"http://example.com/inception-updated.jpg\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -115,7 +115,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/movies/1/update/",
+					"raw": "http://127.0.0.1:8006/movies/1/update/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -123,7 +123,7 @@
 						"0",
 						"1"
 					],
-					"port": "8000",
+					"port": "8006",
 					"path": [
 						"movies",
 						"1",
@@ -135,7 +135,7 @@
 			"response": []
 		},
 		{
-			"name": "Del delete movie",
+			"name": "DEL delete movie",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -155,7 +155,87 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/movies/2/delete/",
+					"raw": "http://127.0.0.1:8006/movies/1/delete/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8006",
+					"path": [
+						"movies",
+						"1",
+						"delete",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST register user",
+			"request": {
+				"auth": {
+					"type": "jwt",
+					"jwt": [
+						{
+							"key": "algorithm",
+							"value": "HS256",
+							"type": "string"
+						},
+						{
+							"key": "isSecretBase64Encoded",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "payload",
+							"value": "{}",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "headerPrefix",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "queryParamKey",
+							"value": "token",
+							"type": "string"
+						},
+						{
+							"key": "header",
+							"value": "{}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"testuser1\",\n  \"email\": \"testuser1@example.com\",\n  \"password\": \"TestPassword123!\",\n  \"password2\": \"TestPassword123!\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/register/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -165,8 +245,460 @@
 					],
 					"port": "8000",
 					"path": [
-						"movies",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST login user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"testuser1@example.com\",\n    \"password\": \"TestPassword123!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/login/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST refresh",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0NjQ0OTg2NSwiaWF0IjoxNzQ2MzYzNDY1LCJqdGkiOiI4YTAzOTVmZWRmNzM0YzdhOTU2YzAxYzNlNzViM2JiZiIsInVzZXJfaWQiOjR9.hiRyl1WNaCkyGRBgHJ0_QaNLkxM4l_sUJR6oI01UbaY\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/token/refresh/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"token",
+						"refresh",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PROTECTED user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ2MzYzNzY1LCJpYXQiOjE3NDYzNjM0NjUsImp0aSI6IjAxNjdhNTVkYzlmYTQ1NmM4ODViNzJkMjllNjdlMWFkIiwidXNlcl9pZCI6NH0.17KkA1qR-9pAoufcqceSh7Vt94njJc_VAWR-FE8YFFE\"",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/protected/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"protected",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST login test admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"adminuser2@example.com\",\n    \"password\": \"TestPassword123!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8003/login/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8003",
+					"path": [
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET halls list",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "POST register test admin",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"adminuser2\",\n  \"email\": \"adminuser2@example.com\",\n  \"password\": \"TestPassword123!\",\n  \"password2\": \"TestPassword123!\"\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8003/register/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8003",
+					"path": [
+						"register",
+						""
+					],
+					"query": [
+						{
+							"key": "Bearer",
+							"value": " \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NTcyNTk1LCJpYXQiOjE3NDc1NzIyOTUsImp0aSI6ImQxZjM5YzZmZDAwNzQyNzQ5ZGJhZjQ5OTEyNzNhY2Y5IiwidXNlcl9pZCI6Mn0.r2ax8_67Nsk8UaRATJJIJvtJQmg83g1OKFubpIVulXU\"",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST create Hall",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NTczODcyLCJpYXQiOjE3NDc1NzM1NzIsImp0aSI6IjM1ZjY5NmUzZTAyOTQ2Y2ViODZjOTYxMDY5ZTZlNDQ0IiwidXNlcl9pZCI6NH0.he3NLj6MrNiWazpNHeIYbIYxXRTtm2QUH4RLb5Vqy4Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Main Hall\",\n  \"rows\": 10,\n  \"seatsPerRow\": 20\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8005/halls/create/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8005",
+					"path": [
+						"halls",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT update Hall",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NTc0MzQxLCJpYXQiOjE3NDc1NzQwNDEsImp0aSI6IjZmZTA5YjAzNzA5NDRlZTM4MGJiYjBkNDNmMDg4ZWE5IiwidXNlcl9pZCI6NH0.Mh6hlUn84QcdFZB2PNrYdoZ3vqBT0zNZUX0nqHoGDQA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Updated Hall\",\n  \"rows\": 12,\n  \"seatsPerRow\": 22\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8006/halls/1/update/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8006",
+					"path": [
+						"halls",
+						"1",
+						"update",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Del DELETE Hall",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NTc1MDMxLCJpYXQiOjE3NDc1NzQ3MzEsImp0aSI6IjBmNzlhZWU4OWVhNTQ4NzM5ZWEyN2NmYjk1NDM2NDA3IiwidXNlcl9pZCI6NH0.Vl9BJOY1fQaSZ9YOqGo6xfSWJoXm-C0wDHPPm6Wco_s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8006/halls/2/delete/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8006",
+					"path": [
+						"halls",
 						"2",
+						"delete",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Session list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8006/sessions/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8006",
+					"path": [
+						"sessions",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST create Session",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NTc1MDMxLCJpYXQiOjE3NDc1NzQ3MzEsImp0aSI6IjBmNzlhZWU4OWVhNTQ4NzM5ZWEyN2NmYjk1NDM2NDA3IiwidXNlcl9pZCI6NH0.Vl9BJOY1fQaSZ9YOqGo6xfSWJoXm-C0wDHPPm6Wco_s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"movie\": 1,\n  \"hall\": 3,\n  \"startTime\": \"2024-05-01T18:00:00Z\",\n  \"price\": 1500\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8006/sessions/create/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8006",
+					"path": [
+						"sessions",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT update Session",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NTc1NjQ2LCJpYXQiOjE3NDc1NzUzNDYsImp0aSI6IjQzYjNkNjJkMGZjOTRmMjNhMDI2ZWQyOTVkM2IwOWJlIiwidXNlcl9pZCI6NH0.CquWaQCUDVR_lAzJc-rxjU_pNfu8kK03QgLiL3aUkbM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"startTime\": \"2024-05-01T20:00:00Z\",\n  \"price\": 1700\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8006/sessions/1/update/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8006",
+					"path": [
+						"sessions",
+						"1",
+						"update",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEL delete Session",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NTc1NjQ2LCJpYXQiOjE3NDc1NzUzNDYsImp0aSI6IjQzYjNkNjJkMGZjOTRmMjNhMDI2ZWQyOTVkM2IwOWJlIiwidXNlcl9pZCI6NH0.CquWaQCUDVR_lAzJc-rxjU_pNfu8kK03QgLiL3aUkbM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8006/sessions/1/delete/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8006",
+					"path": [
+						"sessions",
+						"1",
 						"delete",
 						""
 					]
