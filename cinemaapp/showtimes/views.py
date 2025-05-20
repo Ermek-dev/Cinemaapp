@@ -1,4 +1,6 @@
-from rest_framework import status
+from django.utils.dateparse import parse_date
+from rest_framework import status, filters
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -8,11 +10,23 @@ from accounts.permissions import IsAdmin
 
 
 # Create your views here.
-class SessionListView(APIView):
-    def get(self, request, *args, **kwargs):
-        sessions = Session.objects.all()
-        serializer = SessionSerializer(sessions, many=True)
-        return Response(serializer.data)
+class SessionListView(ListAPIView):
+        serializer_class = SessionSerializer
+
+        def get_queryset(self):
+            queryset = Session.objects.all()
+
+            movie_id = self.request.query_params.get('movieId')
+            hall_id = self.request.query_params.get('hallId')
+            date = self.request.query_params.get('date')
+
+            if movie_id:
+                queryset = queryset.filter(movie_id=movie_id)
+            if hall_id:
+                queryset = queryset.filter(hall_id=hall_id)
+            if date:
+                queryset = queryset.filter(startTime__date = parse_date(date))
+            return queryset
 
 
 class SessionDetailView(APIView):
