@@ -14,18 +14,20 @@ class SessionListView(ListAPIView):
         serializer_class = SessionSerializer
 
         def get_queryset(self):
-            queryset = Session.objects.all()
+            queryset = Session.objects.select_related('movie', 'hall').all()
 
             movie_id = self.request.query_params.get('movieId')
             hall_id = self.request.query_params.get('hallId')
             date = self.request.query_params.get('date')
 
-            if movie_id:
-                queryset = queryset.filter(movie_id=movie_id)
-            if hall_id:
-                queryset = queryset.filter(hall_id=hall_id)
+            if movie_id and movie_id.isdigit():
+                queryset = queryset.filter(movie_id=int(movie_id))
+            if hall_id and hall_id.isdigit():
+                queryset = queryset.filter(hall_id=int(hall_id))
             if date:
-                queryset = queryset.filter(startTime__date = parse_date(date))
+                parsed_date = parse_date(date)
+                if parsed_date:
+                    queryset = queryset.filter(startTime__date = parsed_date)
             return queryset
 
 
