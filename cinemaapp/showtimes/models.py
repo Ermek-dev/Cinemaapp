@@ -23,6 +23,13 @@ class Session(models.Model):
         verbose_name='Стоимость билета'
     )
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['movie']),
+            models.Index(fields=['hall']),
+            models.Index(fields=['startTime']),
+        ]
+
 
     def __str__(self):
         return f"{self.movie.title} at {self.startTime}"
