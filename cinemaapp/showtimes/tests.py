@@ -1,4 +1,5 @@
 from django.urls import reverse
+from rest_framework import status
 from rest_framework.test import APITestCase
 from rest_framework_simplejwt.tokens import RefreshToken
 from accounts.models import User
@@ -114,3 +115,54 @@ class SessionAPITestCase(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.user_token}')
         response = self.client.delete(url)
         self.assertEqual(response.status_code, 403)
+
+
+class SessionFilterTests(APITestCase):
+    def setUp(self):
+        self.hall1 = Hall.objects.create(title='Hall1',rows=6, seatsPerRow=11)
+        self.hall2 = Hall.objects.create(title='Hall2', rows=7, seatsPerRow=12)
+        self.movie1 = Movie.objects.create(title='Movie A',description='Test Desc A', duration=100)
+        self.movie2 = Movie.objects.create(title='Movie B', description='Test Desc B', duration=120)
+
+        self.session1 = Session.objects.create(
+            movie = self.movie1,
+            hall = self.hall1,
+            startTime=make_aware(datetime(2025,6,1,18,0)),
+            price=1200
+        )
+        self.session2 = Session.objects.create(
+            movie = self.movie2,
+            hall = self.hall2,
+            startTime=make_aware(datetime(2025,6,2,20,0)),
+            price=1200
+        )
+
+    def test_filter_by_movie(self):
+        url = reverse('session_list') + f'?movieId={self.movie1.id}'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue(all(session['movie'] == self.movie1.id for session in response.data))
+
+
+    def test_filter_by_hall(self):
+        url = reverse('session_list') + f'?hallId={self.hall2.id}'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue(all(session['hall'] == self.hall2.id for session in response.data))
+
+
+    def test_filter_by_date(self):
+        url = reverse('session_list') + '?date=2025-06-01'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue(all(session['startTime'].startswith('2025-06-01') for session in response.data))
+
+
+    def test_filter_by_result(self):
+        url = reverse('session_list') + '?movieId=9999&hallId=9999&date=2023-01-01'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 0)
+
+
+
