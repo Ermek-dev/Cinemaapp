@@ -55,11 +55,21 @@
 		{
 			"name": "POST create movie",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3Nzc2NjExLCJpYXQiOjE3NDc3NzYzMTEsImp0aSI6ImNjNTViMWRhNzg5NjRlZjU4OGZiNDYzMTQ0ZGQwOWQ2IiwidXNlcl9pZCI6NH0.fHBhAtfpddlW3fIY98RakWgzvCJp2W3CgwmPePuKuK4",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"Inception\",\n    \"description\": \"A mind-bending thriller\",\n    \"duration\": 148,\n    \"posterUrl\": \"http://example.com/inception.jpg\"\n}",
+					"raw": "{\n    \"title\": \"Batman Begins\",\n    \"description\": \"The origin of Batman\",\n    \"duration\": 140,\n    \"posterUrl\": \"http://example.com/batman.jpg\",\n    \"createdAt\": \"2024-04-23T10:00:00Z\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -67,7 +77,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8006/movies/create/",
+					"raw": "http://127.0.0.1:8000/movies/create/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -75,7 +85,7 @@
 						"0",
 						"1"
 					],
-					"port": "8006",
+					"port": "8000",
 					"path": [
 						"movies",
 						"create",
@@ -365,7 +375,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8003/login/",
+					"raw": "http://127.0.0.1:8000/login/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -373,7 +383,7 @@
 						"0",
 						"1"
 					],
-					"port": "8003",
+					"port": "8000",
 					"path": [
 						"login",
 						""
@@ -701,6 +711,214 @@
 						"1",
 						"delete",
 						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET filter sessions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/sessions?movieId=1&hallId=3&date=2024-05-01",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"sessions"
+					],
+					"query": [
+						{
+							"key": "movieId",
+							"value": "1"
+						},
+						{
+							"key": "hallId",
+							"value": "3"
+						},
+						{
+							"key": "date",
+							"value": "2024-05-01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Search by movie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/movies?search=Batman",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"movies"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "Batman"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET search  empty Movie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/movies?search=NoSuchMovie",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"movies"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "NoSuchMovie"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET filter by movieId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/sessions?movieId=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"sessions"
+					],
+					"query": [
+						{
+							"key": "movieId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET filter by hallId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/sessions?hallId=3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"sessions"
+					],
+					"query": [
+						{
+							"key": "hallId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET filter by date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/sessions?date=2024-05-01",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"sessions"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2024-05-01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET filter by MovieId,HallId,Date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/sessions?movieId=1&hallId=3date=2024-05-01",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"sessions"
+					],
+					"query": [
+						{
+							"key": "movieId",
+							"value": "1"
+						},
+						{
+							"key": "hallId",
+							"value": "3date=2024-05-01"
+						}
 					]
 				}
 			},
