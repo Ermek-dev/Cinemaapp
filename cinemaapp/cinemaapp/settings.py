@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'movies',
     'accounts',
     'halls',
-    'showtimes'
+    'showtimes',
+    'booking'
 ]
 
 
