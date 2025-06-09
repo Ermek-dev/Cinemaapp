@@ -23,4 +23,7 @@ urlpatterns = [
     path('',include('accounts.urls')),
     path('',include('halls.urls')),
     path('',include('showtimes.urls')),
+    path('',include('booking.urls')),
 ]
+
+
