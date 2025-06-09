@@ -6,6 +6,7 @@ from .models import Booking
 from .serializers import BookingSerializer
 from accounts.permissions import IsAdmin
 from .models import Session
+from accounts.permissions import IsUser
 
 
 class BookingListView(APIView):
@@ -18,6 +19,7 @@ class BookingListView(APIView):
 
 class TakenSeatsView(APIView):
     permission_classes = [IsAuthenticated]
+    permission_classes = [IsUser]
     def get(self,request,session_id,*args,**kwargs):
         try:
             session = Session.objects.get(id=session_id)
@@ -42,6 +44,7 @@ class TakenSeatsView(APIView):
 
 class BookingCreateView(APIView):
     permission_classes = [IsAuthenticated]
+    permission_classes = [IsUser]
 
     def post(self,request, *args, **kwargs):
         session_id = request.data.get("sessionId")
