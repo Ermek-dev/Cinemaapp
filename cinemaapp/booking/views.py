@@ -8,6 +8,8 @@ from accounts.permissions import IsAdmin
 from .models import Session
 from accounts.permissions import IsUser
 
+from .utils import notify_seat_update
+
 
 class BookingListView(APIView):
     permission_classes = [IsAuthenticated]
@@ -80,6 +82,13 @@ class BookingCreateView(APIView):
             session=session,
             seats=seats
         )
+
+        all_taken = Booking.objects.filter(session=session).values_list("seats", flat=True)
+        merged = []
+        for taken in all_taken:
+            merged.extend(taken)
+        notify_seat_update(session_id,merged)
+
         return Response(
             {"message": "Бронирование успешно создано", "bookingId": booking.id},
             status=status.HTTP_201_CREATED
