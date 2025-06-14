@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'accounts',
     'halls',
     'showtimes',
-    'booking'
+    'booking',
+    'channels',
 ]
 
 
@@ -52,6 +53,12 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+}
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
 }
 
 MIDDLEWARE = [
