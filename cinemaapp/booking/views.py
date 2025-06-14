@@ -13,8 +13,8 @@ from .utils import notify_seat_update
 
 
 class BookingListView(APIView):
-    permission_classes = [IsAuthenticated]
-    def get(self,request, *args, **kwargs):
+    permission_classes = [IsAuthenticated,IsUser]
+    def get(self,request):
         bookings = Booking.objects.filter(user=request.user)
         serializer = BookingSerializer(bookings, many=True)
         return Response(serializer.data)
