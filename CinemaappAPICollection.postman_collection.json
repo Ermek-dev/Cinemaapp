@@ -923,6 +923,129 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "POST booking create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5OTA2NzI1LCJpYXQiOjE3NDk5MDY0MjUsImp0aSI6Ijc3NjAyYzg3Mzc5MzQ0NDliYWRjNzJjYjNiYTA4NTA0IiwidXNlcl9pZCI6MX0.1pBqS0Ra1ZNn1BtogzQjRU6IcHyKvzVwFLtCTFpYwLk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"sessionId\": 2,\n  \"seats\": [ { \"row\": 1, \"seat\": 26 }, { \"row\": 1, \"seat\": 58 } ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/bookings/create/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"bookings",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Bookings list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5OTA2NzI1LCJpYXQiOjE3NDk5MDY0MjUsImp0aSI6Ijc3NjAyYzg3Mzc5MzQ0NDliYWRjNzJjYjNiYTA4NTA0IiwidXNlcl9pZCI6MX0.1pBqS0Ra1ZNn1BtogzQjRU6IcHyKvzVwFLtCTFpYwLk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/bookings/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"bookings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET sessions by id/seats",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5OTA2NzI1LCJpYXQiOjE3NDk5MDY0MjUsImp0aSI6Ijc3NjAyYzg3Mzc5MzQ0NDliYWRjNzJjYjNiYTA4NTA0IiwidXNlcl9pZCI6MX0.1pBqS0Ra1ZNn1BtogzQjRU6IcHyKvzVwFLtCTFpYwLk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/sessions/2/seats/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"sessions",
+						"2",
+						"seats",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
