@@ -1,3 +1,4 @@
+from django.db import transaction
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -45,8 +46,7 @@ class TakenSeatsView(APIView):
 
 
 class BookingCreateView(APIView):
-    permission_classes = [IsAuthenticated]
-    permission_classes = [IsUser]
+    permission_classes = [IsAuthenticated,IsUser]
 
     def post(self,request, *args, **kwargs):
         session_id = request.data.get("sessionId")
@@ -61,28 +61,36 @@ class BookingCreateView(APIView):
         except Session.DoesNotExist:
             return Response({"error": "Сеанс не найден"}, status=status.HTTP_404_NOT_FOUND)
 
-        # Проверка занятых мест
-        taken_seats = Booking.objects.filter(session=session).values_list("seats", flat=True)
-        occupied = []
-        for seat in seats:
-            for taken in taken_seats:
-                if seat in taken:
-                    occupied.append(seat)
+        try:
+            with transaction.atomic():
+                bookings = Booking.objects.select_for_update().filter(session=session)
 
-        if occupied:
-            first = occupied[0]
-            return Response(
-                {"error": f"Место row={first['row']}, seat={first['seat']} уже занято"},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+                taken_seats = []
+                for booking in bookings:
+                    taken_seats.extend(booking.seats)
+                occupied = []
+                for seat in seats:
+                    if seat in taken_seats:
+                            occupied.append(seat)
 
-        # Всё свободно — создаём бронирование
-        booking = Booking.objects.create(
-            user=request.user,
-            session=session,
-            seats=seats
-        )
+                if occupied:
+                    first = occupied[0]
+                    return Response(
+                        {"error": f"Место row={first['row']}, seat={first['seat']} уже занято"},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
 
+                # Всё свободно — создаём бронирование
+                booking = Booking.objects.create(
+                    user=request.user,
+                    session=session,
+                    seats=seats
+                )
+
+        except Exception as e:
+            return Response({'error': str(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+                #Обновление списка занятых мест
         all_taken = Booking.objects.filter(session=session).values_list("seats", flat=True)
         merged = []
         for taken in all_taken:
@@ -90,7 +98,7 @@ class BookingCreateView(APIView):
         notify_seat_update(session_id,merged)
 
         return Response(
-            {"message": "Бронирование успешно создано", "bookingId": booking.id},
-            status=status.HTTP_201_CREATED
-        )
+                    {"message": "Бронирование успешно создано", "bookingId": booking.id},
+                    status=status.HTTP_201_CREATED
+                )
 
