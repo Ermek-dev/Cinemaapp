@@ -25,6 +25,7 @@ class MovieListView(APIView):
         if cache_key in movie_cache:
             cached = movie_cache[cache_key]
             if now - cached["timestamp"] < CACHE_TTL:
+                print("Ответ из кэша")
                 return Response(cached["data"], status=status.HTTP_200_OK)
 
 
@@ -32,6 +33,7 @@ class MovieListView(APIView):
         queryset = Movie.objects.all()
         if search and len(search) <= 100:
             queryset = queryset.filter(title__icontains=search)
+            print("Ответ из базы")
         serializer = MovieSerializer(queryset, many=True)
         movie_cache[cache_key] = {
             "data": serializer.data,
