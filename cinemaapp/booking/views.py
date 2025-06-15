@@ -8,8 +8,13 @@ from .serializers import BookingSerializer
 from accounts.permissions import IsAdmin
 from .models import Session
 from accounts.permissions import IsUser
-
 from .utils import notify_seat_update
+import time
+
+
+rate_limit_storage = {}
+RATE_LIMIT = 2
+WINDOW_SECONDS = 60
 
 
 class BookingListView(APIView):
@@ -49,6 +54,25 @@ class BookingCreateView(APIView):
     permission_classes = [IsAuthenticated,IsUser]
 
     def post(self,request, *args, **kwargs):
+        user_id = request.user.id
+        now = time.time()
+
+        # Получаем и фильтруем предыдущие таймштампы
+        timestamps = rate_limit_storage.get(user_id,[])
+        timestamps = [ts for ts in timestamps if now - ts < WINDOW_SECONDS]
+
+        # Проверка лимита
+        if len(timestamps) >= RATE_LIMIT:
+            return Response(
+                {"error": "Слишком много запросов, попробуйте позже"},
+                status=status.HTTP_429_TOO_MANY_REQUESTS
+            )
+
+        #обновляем хранилище
+        timestamps.append(now)
+        rate_limit_storage[user_id] = timestamps
+
+
         session_id = request.data.get("sessionId")
         seats = request.data.get("seats")
 
