@@ -1,0 +1,10 @@
+const socket = new WebSocket("ws://localhost:8000/ws/session/2/seats/");
+
+socket.onopen = () => {
+    console.log("WebSocket подключен");
+};
+
+socket.onmessage = (event) => {
+    console.log("📩 Сообщение:", JSON.parse(event.data));
+};
+
