@@ -18,42 +18,42 @@ class ProtectedUserView(APIView):
     permission_classes = [IsUser]
 
     def get(self, request):
-        return Response({'message': 'Привет,пользователь'})
+        return Response({'message': 'Привет,пользователь'},status=status.HTTP_200_OK)
 
 
 class RegisterView(APIView):
     def post(self, request):
         email = request.data.get('email')
         if User.objects.filter(email=email).exists():
-            return Response({'errors': 'Пользователь с таким email уже существует!'}, status=status.HTTP_400_BAD_REQUEST)
+            raise Exception('Пользователь с таким email уже существует!')
+
         serializer = RegisterSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            refresh = RefreshToken.for_user(user)
-            access_token = str(refresh.access_token)
-            return Response({
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        refresh = RefreshToken.for_user(user)
+        return Response({
                 'message': 'Пользователь успешно зарегистрирован.',
-                'accessToken': access_token,
+                'accessToken': str(refresh.access_token),
                 'refreshToken': str(refresh)
             }, status=status.HTTP_201_CREATED)
-        return Response({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class  LoginView(APIView):
     def post(self, request):
             email =request.data.get('email')
             password = request.data.get('password')
-            user = get_user_model().objects.filter(email=email).first()
+            if not email or not password:
+                raise Exception("Email и пароль обязательны")
 
-            if user is not None and user.check_password(password):
-                refresh = RefreshToken.for_user(user)
-                access_token = str(refresh.access_token)
-                return Response({
+            user = get_user_model().objects.filter(email=email).first()
+            if user is None or not user.check_password(password):
+                raise Exception('Неверный email или пароль,попробуйте еще раз!!!')
+
+            refresh = RefreshToken.for_user(user)
+            return Response({
                         'message': 'Вход успешно выполнен.',
-                        'accessToken': access_token,
+                        'accessToken': str(refresh.access_token),
                         'refreshToken': str(refresh)
                     }, status=status.HTTP_200_OK)
-            else:
-                return Response({'errors': 'Неверный email или пароль,попробуйте еще раз!!!'}, status=status.HTTP_400_BAD_REQUEST)
 
 
