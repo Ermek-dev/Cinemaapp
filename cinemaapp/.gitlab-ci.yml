@@ -1,0 +1,35 @@
+stages:
+  - test
+  - build
+variables:
+  DOCKER_DRIVER: overlay2
+  POSTGRES_DB: test_db
+  POSTGRES_USER: test_user
+  POSTGRES_PASSWORD: test_pass
+  DJANGO_SETTINGS_MODULE: cinemaapp.settings
+
+unit_tests:
+  stage: test
+  image: python:3.10
+  services:
+    - redis:alpine
+  before_script:
+    - python -m venv venv
+    - source venv/bin/activate
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+  script:
+    - python manage.py migrate
+    - pytest --disable-warnings
+
+
+
+build_backend:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+  script:
+    - docker build -t cinema-backend .
