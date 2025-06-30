@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cinema-dark text-cinema-light min-h-screen;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading leading-tight;
+  }
+  
+  p, li, span {
+    @apply font-sans leading-relaxed;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .movie-card {
+    @apply bg-gray-900 rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02];
+  }
+  
+  .btn-primary {
+    @apply bg-cinema-red text-white px-6 py-2 rounded font-medium hover:bg-red-700 transition duration-300;
+  }
+  
+  .btn-secondary {
+    @apply bg-transparent border border-cinema-gold text-cinema-gold px-6 py-2 rounded font-medium hover:bg-cinema-gold hover:text-cinema-dark transition duration-300;
+  }
+}
