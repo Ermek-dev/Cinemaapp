@@ -12,8 +12,12 @@ ROLE_PROTECTED_PATHS = {
 
 class JWTAuthenticationMiddleware(MiddlewareMixin):
     def process_request(self, request):
+        if any(request.path.startswith(p) for p  in ['/swagger','/swagger.json', '/openai','/docs', '/redoc']):
+            print(f"[JWTMiddleware] Bypassing auth for: {request.path}")
+            request.user = AnonymousUser()
+            return None
         if request.path.startswith('/admin'):
-            return
+            return None
         jwt_authenticator = JWTAuthentication()
         try:
             user_auth_tuple = jwt_authenticator.authenticate(request)
