@@ -35,7 +35,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8006/movies/1",
+					"raw": "http://127.0.0.1:8000/movies/1",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -43,7 +43,7 @@
 						"0",
 						"1"
 					],
-					"port": "8006",
+					"port": "8000",
 					"path": [
 						"movies",
 						"1"
@@ -60,7 +60,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3Nzc2NjExLCJpYXQiOjE3NDc3NzYzMTEsImp0aSI6ImNjNTViMWRhNzg5NjRlZjU4OGZiNDYzMTQ0ZGQwOWQ2IiwidXNlcl9pZCI6NH0.fHBhAtfpddlW3fIY98RakWgzvCJp2W3CgwmPePuKuK4",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUxMzE3OTA1LCJpYXQiOjE3NTEzMTc2MDUsImp0aSI6ImYxYzg0MGRjMjZhZjQ2OTJiZGVmZDA2MDlmMWNhYjczIiwidXNlcl9pZCI6NH0.ZDDIYGGTJQzcYQxOwHGotjjLdELWBu8HcD4QXt4yaoQ",
 							"type": "string"
 						}
 					]
@@ -99,16 +99,11 @@
 			"name": "PUT update movie",
 			"request": {
 				"auth": {
-					"type": "basic",
-					"basic": [
+					"type": "bearer",
+					"bearer": [
 						{
-							"key": "password",
-							"value": "12345",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "admin",
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUxMzE4MTcwLCJpYXQiOjE3NTEzMTc4NzAsImp0aSI6IjUzMDMxZDRjMjc4YzRjOWQ5ZmIxNjFlM2JjZjk2MjdkIiwidXNlcl9pZCI6NH0.dxV3bxploLA6dS09kf7nF1YSlt9TlbaUFZopeRT02FM",
 							"type": "string"
 						}
 					]
@@ -125,7 +120,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8006/movies/1/update/",
+					"raw": "http://127.0.0.1:8000/movies/3/update/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -133,10 +128,10 @@
 						"0",
 						"1"
 					],
-					"port": "8006",
+					"port": "8000",
 					"path": [
 						"movies",
-						"1",
+						"3",
 						"update",
 						""
 					]
@@ -148,16 +143,11 @@
 			"name": "DEL delete movie",
 			"request": {
 				"auth": {
-					"type": "basic",
-					"basic": [
+					"type": "bearer",
+					"bearer": [
 						{
-							"key": "password",
-							"value": "12345",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "admin",
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUxMzE4MTcwLCJpYXQiOjE3NTEzMTc4NzAsImp0aSI6IjUzMDMxZDRjMjc4YzRjOWQ5ZmIxNjFlM2JjZjk2MjdkIiwidXNlcl9pZCI6NH0.dxV3bxploLA6dS09kf7nF1YSlt9TlbaUFZopeRT02FM",
 							"type": "string"
 						}
 					]
@@ -165,7 +155,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8006/movies/1/delete/",
+					"raw": "http://127.0.0.1:8000/movies/3/delete/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -173,10 +163,10 @@
 						"0",
 						"1"
 					],
-					"port": "8006",
+					"port": "8000",
 					"path": [
 						"movies",
-						"1",
+						"3",
 						"delete",
 						""
 					]
@@ -269,7 +259,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"testuser1@example.com\",\n    \"password\": \"TestPassword123!\"\n}",
+					"raw": "{\n    \"email\": \"testuser5@example.com\",\n    \"password\": \"TestPassword123!\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -301,7 +291,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0NjQ0OTg2NSwiaWF0IjoxNzQ2MzYzNDY1LCJqdGkiOiI4YTAzOTVmZWRmNzM0YzdhOTU2YzAxYzNlNzViM2JiZiIsInVzZXJfaWQiOjR9.hiRyl1WNaCkyGRBgHJ0_QaNLkxM4l_sUJR6oI01UbaY\"\n}",
+					"raw": "{\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MTQwMzgwNiwiaWF0IjoxNzUxMzE3NDA2LCJqdGkiOiI5YzM2NGMzNGNlMjY0YzI5YjlmN2Q4MzQyNTQwYWRmZiIsInVzZXJfaWQiOjV9.X0gx7HIkZjqyeaQtkzmneE3Q3YPCKh_fiLjj0cftmlI\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -396,7 +386,22 @@
 			"name": "GET halls list",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/halls/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"halls",
+						""
+					]
+				}
 			},
 			"response": []
 		},
@@ -457,7 +462,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NTczODcyLCJpYXQiOjE3NDc1NzM1NzIsImp0aSI6IjM1ZjY5NmUzZTAyOTQ2Y2ViODZjOTYxMDY5ZTZlNDQ0IiwidXNlcl9pZCI6NH0.he3NLj6MrNiWazpNHeIYbIYxXRTtm2QUH4RLb5Vqy4Q",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUxMzE4NDc1LCJpYXQiOjE3NTEzMTgxNzUsImp0aSI6IjA5YjI5ZTliNzJiMzRlMGFiN2ZlNDA0ZmEwZDhjOTMwIiwidXNlcl9pZCI6NH0.WvBXgdCJQLkZJlM6DGnBIXB2iadxyRsERu98c0FcSbE",
 							"type": "string"
 						}
 					]
@@ -474,7 +479,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8005/halls/create/",
+					"raw": "http://127.0.0.1:8000/halls/create/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -482,7 +487,7 @@
 						"0",
 						"1"
 					],
-					"port": "8005",
+					"port": "8000",
 					"path": [
 						"halls",
 						"create",
@@ -500,7 +505,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NTc0MzQxLCJpYXQiOjE3NDc1NzQwNDEsImp0aSI6IjZmZTA5YjAzNzA5NDRlZTM4MGJiYjBkNDNmMDg4ZWE5IiwidXNlcl9pZCI6NH0.Mh6hlUn84QcdFZB2PNrYdoZ3vqBT0zNZUX0nqHoGDQA",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUxMzE4NDc1LCJpYXQiOjE3NTEzMTgxNzUsImp0aSI6IjA5YjI5ZTliNzJiMzRlMGFiN2ZlNDA0ZmEwZDhjOTMwIiwidXNlcl9pZCI6NH0.WvBXgdCJQLkZJlM6DGnBIXB2iadxyRsERu98c0FcSbE",
 							"type": "string"
 						}
 					]
@@ -517,7 +522,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8006/halls/1/update/",
+					"raw": "http://127.0.0.1:8000/halls/4/update/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -525,10 +530,10 @@
 						"0",
 						"1"
 					],
-					"port": "8006",
+					"port": "8000",
 					"path": [
 						"halls",
-						"1",
+						"4",
 						"update",
 						""
 					]
@@ -544,7 +549,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NTc1MDMxLCJpYXQiOjE3NDc1NzQ3MzEsImp0aSI6IjBmNzlhZWU4OWVhNTQ4NzM5ZWEyN2NmYjk1NDM2NDA3IiwidXNlcl9pZCI6NH0.Vl9BJOY1fQaSZ9YOqGo6xfSWJoXm-C0wDHPPm6Wco_s",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUxMzE4OTUwLCJpYXQiOjE3NTEzMTg2NTAsImp0aSI6ImU2MWJlNzdmM2ZkNjQ3ZDY4OTI5YWRhZWQ4NzIzODAwIiwidXNlcl9pZCI6NH0.PoWKpT2frTVtIeucpwSGJ8Xsy0bUbDBeV7mt2neNE1s",
 							"type": "string"
 						}
 					]
@@ -552,7 +557,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8006/halls/2/delete/",
+					"raw": "http://127.0.0.1:8000/halls/3/delete/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -560,10 +565,10 @@
 						"0",
 						"1"
 					],
-					"port": "8006",
+					"port": "8000",
 					"path": [
 						"halls",
-						"2",
+						"3",
 						"delete",
 						""
 					]
@@ -577,7 +582,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8006/sessions/",
+					"raw": "http://127.0.0.1:8000/sessions/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -585,7 +590,7 @@
 						"0",
 						"1"
 					],
-					"port": "8006",
+					"port": "8000",
 					"path": [
 						"sessions",
 						""
@@ -602,7 +607,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NTc1MDMxLCJpYXQiOjE3NDc1NzQ3MzEsImp0aSI6IjBmNzlhZWU4OWVhNTQ4NzM5ZWEyN2NmYjk1NDM2NDA3IiwidXNlcl9pZCI6NH0.Vl9BJOY1fQaSZ9YOqGo6xfSWJoXm-C0wDHPPm6Wco_s",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUxMzE5NjI3LCJpYXQiOjE3NTEzMTkzMjcsImp0aSI6ImFjMjNlYTZjNGZkOTRlYjY4OWRlOTJhYjk1MTA1MTU4IiwidXNlcl9pZCI6NH0.wipK-4EnCzNsl2C3Nt0Dedxe47FZNewsUFSpLSB1AT8",
 							"type": "string"
 						}
 					]
@@ -611,7 +616,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"movie\": 1,\n  \"hall\": 3,\n  \"startTime\": \"2024-05-01T18:00:00Z\",\n  \"price\": 1500\n}",
+					"raw": "{\n  \"movie\": 1,\n  \"hall\": 4,\n  \"startTime\": \"2024-05-01T18:00:00Z\",\n  \"price\": 1500\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -619,7 +624,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8006/sessions/create/",
+					"raw": "http://127.0.0.1:8000/sessions/create/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -627,7 +632,7 @@
 						"0",
 						"1"
 					],
-					"port": "8006",
+					"port": "8000",
 					"path": [
 						"sessions",
 						"create",
@@ -645,7 +650,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NTc1NjQ2LCJpYXQiOjE3NDc1NzUzNDYsImp0aSI6IjQzYjNkNjJkMGZjOTRmMjNhMDI2ZWQyOTVkM2IwOWJlIiwidXNlcl9pZCI6NH0.CquWaQCUDVR_lAzJc-rxjU_pNfu8kK03QgLiL3aUkbM",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUxMzE4OTUwLCJpYXQiOjE3NTEzMTg2NTAsImp0aSI6ImU2MWJlNzdmM2ZkNjQ3ZDY4OTI5YWRhZWQ4NzIzODAwIiwidXNlcl9pZCI6NH0.PoWKpT2frTVtIeucpwSGJ8Xsy0bUbDBeV7mt2neNE1s",
 							"type": "string"
 						}
 					]
@@ -662,7 +667,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8006/sessions/1/update/",
+					"raw": "http://127.0.0.1:8000/sessions/3/update/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -670,10 +675,10 @@
 						"0",
 						"1"
 					],
-					"port": "8006",
+					"port": "8000",
 					"path": [
 						"sessions",
-						"1",
+						"3",
 						"update",
 						""
 					]
@@ -689,7 +694,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NTc1NjQ2LCJpYXQiOjE3NDc1NzUzNDYsImp0aSI6IjQzYjNkNjJkMGZjOTRmMjNhMDI2ZWQyOTVkM2IwOWJlIiwidXNlcl9pZCI6NH0.CquWaQCUDVR_lAzJc-rxjU_pNfu8kK03QgLiL3aUkbM",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUxMzE4OTUwLCJpYXQiOjE3NTEzMTg2NTAsImp0aSI6ImU2MWJlNzdmM2ZkNjQ3ZDY4OTI5YWRhZWQ4NzIzODAwIiwidXNlcl9pZCI6NH0.PoWKpT2frTVtIeucpwSGJ8Xsy0bUbDBeV7mt2neNE1s",
 							"type": "string"
 						}
 					]
@@ -697,7 +702,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8006/sessions/1/delete/",
+					"raw": "http://127.0.0.1:8000/sessions/3/delete/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -705,10 +710,10 @@
 						"0",
 						"1"
 					],
-					"port": "8006",
+					"port": "8000",
 					"path": [
 						"sessions",
-						"1",
+						"3",
 						"delete",
 						""
 					]
@@ -932,7 +937,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5OTA2NzI1LCJpYXQiOjE3NDk5MDY0MjUsImp0aSI6Ijc3NjAyYzg3Mzc5MzQ0NDliYWRjNzJjYjNiYTA4NTA0IiwidXNlcl9pZCI6MX0.1pBqS0Ra1ZNn1BtogzQjRU6IcHyKvzVwFLtCTFpYwLk",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUxMzE5NjcxLCJpYXQiOjE3NTEzMTkzNzEsImp0aSI6IjVlNDg3YTZjZjU4NDQ1NThhNTQ3MDEyZWEwMzMzN2Q5IiwidXNlcl9pZCI6NX0.mjnCWPdTA2cczz_FOICrj9PkvHjiGWslNwtxcchkQLg",
 							"type": "string"
 						}
 					]
@@ -941,7 +946,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"sessionId\": 2,\n  \"seats\": [ { \"row\": 1, \"seat\": 26 }, { \"row\": 1, \"seat\": 58 } ]\n}",
+					"raw": "{\n  \"sessionId\": 4,\n  \"seats\": [ { \"row\": 1, \"seat\": 26 }, { \"row\": 1, \"seat\": 58 } ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -978,7 +983,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5OTA2NzI1LCJpYXQiOjE3NDk5MDY0MjUsImp0aSI6Ijc3NjAyYzg3Mzc5MzQ0NDliYWRjNzJjYjNiYTA4NTA0IiwidXNlcl9pZCI6MX0.1pBqS0Ra1ZNn1BtogzQjRU6IcHyKvzVwFLtCTFpYwLk",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUxMzE5MjEyLCJpYXQiOjE3NTEzMTg5MTIsImp0aSI6IjBhZGMyMTdiN2RhZjQxMWFiMTI4NzJjMWMwOWFhMDg0IiwidXNlcl9pZCI6NX0.sfTbg-gnTgy9LTaQGqP614Sjy0vhNvkftIWHa0cM7To",
 							"type": "string"
 						}
 					]
@@ -1020,7 +1025,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5OTA2NzI1LCJpYXQiOjE3NDk5MDY0MjUsImp0aSI6Ijc3NjAyYzg3Mzc5MzQ0NDliYWRjNzJjYjNiYTA4NTA0IiwidXNlcl9pZCI6MX0.1pBqS0Ra1ZNn1BtogzQjRU6IcHyKvzVwFLtCTFpYwLk",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUxMzE5NjcxLCJpYXQiOjE3NTEzMTkzNzEsImp0aSI6IjVlNDg3YTZjZjU4NDQ1NThhNTQ3MDEyZWEwMzMzN2Q5IiwidXNlcl9pZCI6NX0.mjnCWPdTA2cczz_FOICrj9PkvHjiGWslNwtxcchkQLg",
 							"type": "string"
 						}
 					]
@@ -1028,7 +1033,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/sessions/2/seats/",
+					"raw": "http://127.0.0.1:8000/sessions/4/seats/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -1039,8 +1044,50 @@
 					"port": "8000",
 					"path": [
 						"sessions",
-						"2",
+						"4",
 						"seats",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "POST bookings/create 429",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5OTg3NzQ5LCJpYXQiOjE3NDk5ODc0NDksImp0aSI6IjVlZmZmNjg3MjIwNjQ3MzI5MTJmZTJlZTAxYThlODU3IiwidXNlcl9pZCI6MX0.k-ktA15R2ksB5UCk0pJaiDuAqbJn4RVcRvQShpRYKbk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/bookings/create/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"bookings",
+						"create",
 						""
 					]
 				}
