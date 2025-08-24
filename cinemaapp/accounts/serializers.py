@@ -4,30 +4,23 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import Token
 from .models import User
 
-
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
-    password2 = serializers.CharField(write_only=True,required=True)
+    confirmPassword = serializers.CharField(write_only=True, required=True)
+
     class Meta:
         model = User
-        fields = (
-            'username',
-            'email',
-            'password',
-            'password2',
-        )
+        fields = ('email', 'password', 'confirmPassword')
 
     def validate(self, attrs):
-        if attrs['password'] != attrs['password2']:
-            raise serializers.ValidationError({'password': 'пароли не совпадают!'})
+        if attrs['password'] != attrs['confirmPassword']:
+            raise serializers.ValidationError({'password': 'Пароли не совпадают!'})
         return attrs
 
-
     def create(self, validated_data):
-        validated_data.pop('password2')
-        validated_data['role'] = 'U'
+        validated_data.pop('confirmPassword')
+        validated_data['role'] = User.RoleChoices.USER
         return User.objects.create_user(**validated_data)
-
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
