@@ -1,12 +1,17 @@
 from django.contrib.auth import authenticate, get_user_model
+from django.core.exceptions import ValidationError
 from rest_framework import status
+
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User
 from .permissions import IsAdmin, IsUser
 from .serializers import RegisterSerializer
+import logging
 
+
+logger = logging.getLogger('cinemaapp')
 
 class ProtectedView(APIView):
     permission_classes = [IsAdmin]
@@ -43,11 +48,13 @@ class  LoginView(APIView):
             email =request.data.get('email')
             password = request.data.get('password')
             if not email or not password:
-                raise Exception("Email и пароль обязательны")
+                logger.warning("Missing email or password")
+                raise ValidationError("Email и пароль обязательны")
 
             user = get_user_model().objects.filter(email=email).first()
             if user is None or not user.check_password(password):
-                raise Exception('Неверный email или пароль,попробуйте еще раз!!!')
+                logger.warning("Missing email or password")
+                raise ValidationError('Неверный email или пароль,попробуйте еще раз!!!')
 
             refresh = RefreshToken.for_user(user)
             return Response({
