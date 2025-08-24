@@ -1,29 +1,23 @@
-
 services:
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: cinemaapp-backend
-    command: gunicorn cinemaapp.wsgi:application --bind 0.0.0.0:8000
-    volumes: []
+    build: .
     ports:
       - "8000:8000"
-    env_file:
-      - .env
+    env_file: .env
     depends_on:
-      - redis
-
-  redis:
-    image: redis:alpine
-    container_name: cinemaapp-redis
+      - db
 
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    build: ./frontend
+    container_name: frontend
     ports:
-      - "8080:80"
+      - "3000:80"
     environment:
-      - API_URL=http://localhost:8000
-    restart: unless-stopped
+      API_URL: http://127.0.0.1:8000  # ✅ Вот здесь важно!
+      WS_URL: ws://127.0.0.1:8000/ws
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:15
+    # остальные настройки...

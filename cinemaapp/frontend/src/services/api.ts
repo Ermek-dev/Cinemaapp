@@ -1,5 +1,4 @@
 import { Movie } from '../types/movie';
-import { mockMovies } from '../data/mockData';
 
 declare global {
   interface Window {
@@ -15,16 +14,21 @@ const getApiUrl = () => window.ENV_CONFIG?.API_URL || 'http://localhost:3000';
  * Fetch all movies from the API
  * Falls back to mock data if API is unavailable
  */
-export async function getMovies(): Promise<Movie[]> {
+export async function getMovies(search?: string): Promise<Movie[]> {
   try {
-    const response = await fetch(`${getApiUrl()}/movies`);
+    const url = new URL(`${getApiUrl()}/movies`);
+    if (search) {
+      url.searchParams.append('search', search);
+    }
+
+    const response = await fetch(url.toString());
     if (!response.ok) {
       throw new Error('API error');
     }
     return await response.json();
   } catch (error) {
     console.warn('Failed to fetch movies from API, using mock data', error);
-    return mockMovies;
+    return error;
   }
 }
 
@@ -41,7 +45,6 @@ export async function getMovieById(id: number | string): Promise<Movie | null> {
     return await response.json();
   } catch (error) {
     console.warn(`Failed to fetch movie ${id} from API, using mock data`, error);
-    const mockMovie = mockMovies.find(movie => movie.id === Number(id));
-    return mockMovie || null;
+    return error;
   }
 }

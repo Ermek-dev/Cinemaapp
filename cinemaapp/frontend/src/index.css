@@ -1,35 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply bg-cinema-dark text-cinema-light min-h-screen;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading leading-tight;
-  }
-  
-  p, li, span {
-    @apply font-sans leading-relaxed;
-  }
+
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #0f0f0f;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #0f0f0f;
+}
+
+#root {
+  width: 100%;
+  margin: 0 auto;
+  text-align: left;
 }
 
 @layer components {
   .container-custom {
-    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
-  .movie-card {
-    @apply bg-gray-900 rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02];
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f1f1f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffd700;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffed4e;
+}
+
+/* Loading animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
-  
-  .btn-primary {
-    @apply bg-cinema-red text-white px-6 py-2 rounded font-medium hover:bg-red-700 transition duration-300;
-  }
-  
-  .btn-secondary {
-    @apply bg-transparent border border-cinema-gold text-cinema-gold px-6 py-2 rounded font-medium hover:bg-cinema-gold hover:text-cinema-dark transition duration-300;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Form focus styles */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #ffd700;
+  border-color: #ffd700;
+}
+
+/* Button hover effects */
+.btn-primary {
+  @apply bg-cinema-gold text-black px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-yellow-500 hover:shadow-lg;
+}
+
+.btn-secondary {
+  @apply bg-gray-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-gray-500;
+}
+
+.btn-danger {
+  @apply bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-red-500;
+}
+
+/* Card styles */
+.card {
+  @apply bg-gray-800 rounded-lg border border-gray-700 p-6;
+}
+
+.card-header {
+  @apply border-b border-gray-700 pb-4 mb-4;
+}
+
+/* Text styles */
+.text-primary {
+  @apply text-cinema-gold;
+}
+
+.text-muted {
+  @apply text-gray-400;
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .container-custom {
+    @apply px-4;
   }
 }
